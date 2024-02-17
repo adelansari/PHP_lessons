@@ -59,6 +59,11 @@
                     <option value="Phone">Phone</option>
                 </select>
             </p>
+            <!-- <p>
+                <label><input type="radio" name="productname" value="Book" checked> Book</label><br>
+                <label><input type="radio" name="productname" value="Computer"> Computer</label><br>
+                <label><input type="radio" name="productname" value="Phone"> Phone</label>
+            </p> -->
             <p><label for="productamount">Amount:</label><br>
                 <input type="text" id="productamount" name="productamount">
             </p>
