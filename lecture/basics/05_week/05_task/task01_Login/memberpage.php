@@ -1,4 +1,5 @@
 <?php
+    session_start();
     // if the user is not logged in, send them back to login.php
     if(!isset($_SESSION["username"])) {
         header("Location: login.php");

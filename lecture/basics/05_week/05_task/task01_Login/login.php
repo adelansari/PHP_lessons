@@ -1,4 +1,5 @@
 <?php
+    session_start();
     $error_msg = "";
 
     // this is a handy little trick to know if the form has been sent
@@ -7,19 +8,16 @@
         // ToDo: check if the username / password combo is student / bc-college or teacher / react
         // if yes, set the session variable (e.g. $_SESSION["username"]) and redirect the user to memberpage.php
         // else set $error_msg to "Wrong username or password."
-        if($_POST["username"] == "student" && $_POST["password"] == "bc-college") {
-            session_start();
+        $valid_users = [
+            "student" => "bc-college",
+            "teacher" => "react"
+        ];
+    
+        if(array_key_exists($_POST["username"], $valid_users) && $valid_users[$_POST["username"]] == $_POST["password"]) {
             $_SESSION["username"] = $_POST["username"];
             header("Location: memberpage.php");
             exit;
-        }
-        else if($_POST["username"] == "teacher" && $_POST["password"] == "react") {
-            session_start();
-            $_SESSION["username"] = $_POST["username"];
-            header("Location: memberpage.php");
-            exit;
-        }
-        else {
+        } else {
             $error_msg = "Wrong username or password.";
         }
     }
