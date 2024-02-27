@@ -13,24 +13,30 @@
         
         // handle the submit
         if($_SERVER["REQUEST_METHOD"] == "POST") {
-            echo var_dump($_POST);
+            // echo var_dump($_POST);
 
             $name = $_POST['name'];
             $email = $_POST['email'];
             $password1 = $_POST['password1'];
             $password2 = $_POST['password2'];
-            $gender = $_POST['gender'];
         
             if (empty($name) || empty($email) || $password1 == '' || empty($password2) ) {
                 echo "All fields are required!<br>";
             } elseif ($password1 != $password2) {
                 echo "Passwords do not match!<br>";
+            } elseif (!isset($_POST['gender'])) {
+                echo "Please select/input your gender!<br>";
             } else {
-                echo "Welcome, " . $name . "!";
-                echo "Gender is ". $gender;
+                if ($_POST['gender'] == 'Other') {
+                    $gender = $_POST['gender-other'];
+                } else {
+                    $gender = $_POST['gender'];
+                }
                 // To do
                 // print the values of variable $name, $email,
                 // $password1 and $gender here on the page
+                echo "Welcome ", $name, "\n";
+                echo $email, " ", $password1, " ", $gender;
             };
         };
     
@@ -57,7 +63,7 @@
         <label for="female">Female</label><br>
         <input type="radio" name="gender" id="other" value="Other">
         <label for="other">Other </label>
-        <input type="text" name="gender_other" for="other" value="<?php echo $gender;?>">
+        <input type="text" name="gender-other" onfocus="document.getElementById('other').checked = true">
 
         <br><br>
 
