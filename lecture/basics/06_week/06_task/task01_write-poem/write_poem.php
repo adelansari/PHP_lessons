@@ -1,10 +1,15 @@
 <?php
     // if the form has been sent, add the new verse to the file
-    if (isset($_POST['add-to-poem'])) {
-        $newVerse = $_POST['new-verse'];
-        $file = fopen('poem.txt', 'a') or die("Failed to open the file");;
-        fwrite($file, $newVerse . "\n");
-        fclose($file);
+    if($_SERVER['REQUEST_METHOD'] == 'POST') {
+        if (isset($_POST['add-to-poem'])) {
+            // Add the new verse to the file
+            $newVerse = $_POST['new-verse'] . "\n";
+            file_put_contents('poem.txt', $newVerse, FILE_APPEND);
+        }
+    }
+    $poem = '';
+    if (file_exists('poem.txt')) {
+        $poem = file_get_contents('poem.txt');
     }
 ?>
 <!DOCTYPE html>
@@ -20,12 +25,7 @@
     <div id="poem">
         <?php
             // read the poem from file and display here
-            $file = fopen('poem.txt', 'r');
-            while (!feof($file)) {
-                $verse = fgets($file);
-                echo $verse . "<br>";
-            }
-            fclose($file);
+            echo nl2br($poem);
         ?>
     </div>
 
