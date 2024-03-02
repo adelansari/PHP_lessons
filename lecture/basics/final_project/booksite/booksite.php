@@ -37,6 +37,36 @@
                 // If the book is in the favorite list, add the class "fa-star" to the a tag with "bookmark" class.
                 // If not, add the class "fa-star-o". These are Font Awesome classes that add a filled star and a star outline respectively.
                 // Also, make sure to set the id parameter for each book, so the setfavorite.php page gets the information which book to favorite/unfavorite.
+
+                // Read the book data from books.json
+                $books = json_decode(file_get_contents('books.json'), true);
+
+                // Get the genre from the GET parameter
+                $genre = isset($_GET['genre']) ? $_GET['genre'] : null;
+
+                // Get the favorite books from the cookies
+                $favorites = isset($_COOKIE['favorites']) ? json_decode($_COOKIE['favorites'], true) : [];
+
+                foreach ($books as $id => $book) {
+                    // If a genre is given and the book's genre doesn't match, skip this book
+                    if ($genre !== null && $book['genre'] !== $genre) {
+                        continue;
+                    }
+
+                    // Check if the book is a favorite
+                    $isFavorite = in_array($id, $favorites);
+
+                    // Display the book
+                    echo '<section class="book">';
+                    echo '<a class="bookmark fa ' . ($isFavorite ? 'fa-star' : 'fa-star-o') . '" href="setfavorite.php?id=' . $id . '"></a>';
+                    echo '<h3>' . htmlspecialchars($book['title']) . '</h3>';
+                    echo '<p class="publishing-info">';
+                    echo '<span class="author">' . htmlspecialchars($book['author']) . '</span>,';
+                    echo '<span class="year">' . htmlspecialchars($book['year']) . '</span>';
+                    echo '</p>';
+                    echo '<p class="description">' . htmlspecialchars($book['description']) . '</p>';
+                    echo '</section>';
+                }
             ?>
             <h2>Genre Name or "All Books"</h2>
 
