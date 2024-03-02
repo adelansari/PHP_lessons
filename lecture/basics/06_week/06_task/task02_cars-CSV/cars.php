@@ -1,5 +1,16 @@
 <?php
     // if the form has been sent, add the new car to file
+    if(isset($_POST['add-car'])) {
+        $number = $_POST['number'];
+        $make = $_POST['make'];
+        $model = $_POST['model'];
+        $color = $_POST['color'];
+        $carArray = [$number, $make, $model, $color];
+
+        $file = fopen('cars.csv', 'a');
+        fputcsv($file, $carArray);
+        fclose($file);
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,6 +45,21 @@
         </tr>
         <?php
             // read the data from file and display as table rows
+            if(file_exists('cars.csv')) {
+                $file = fopen('cars.csv', 'r');
+                while(!feof($file)) {
+                    $car = fgetcsv($file);
+                    if($car) {
+                        echo '<tr>';
+                        foreach($car as $value) {
+                            echo '<td>' . $value . '</td>';
+                        }
+                        echo '</tr>';
+                    }
+                }
+                fclose($file);
+            }
+            
         ?>
     </table>
 
