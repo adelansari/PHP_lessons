@@ -1,5 +1,26 @@
 <?php
     // if the form has been sent, add the new car to file
+    if(isset($_POST['add-car'])) {
+        $number = $_POST['number'];
+        $make = $_POST['make'];
+        $model = $_POST['model'];
+        $color = $_POST['color'];
+
+        $newCar = array(
+            'Number' => $number,
+            'Make' => $make,
+            'Model' => $model,
+            'Color' => $color
+        );
+
+        if(file_exists('cars.json')) {
+            $cars = json_decode(file_get_contents('cars.json'), true);
+        }
+
+        array_push($cars, $newCar);
+
+        file_put_contents('cars.json', json_encode($cars));
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,6 +55,13 @@
         </tr>
         <?php
             // read the data from file and display as table rows
+            foreach($cars as $car) {
+                echo '<tr>';
+                foreach($car as $value) {
+                    echo "<td>$value</td>";
+                }
+                echo '</tr>';
+            }
         ?>
     </table>
 
