@@ -38,6 +38,10 @@ if (isset($_COOKIE['favorites'])) {
 // favorite book ids array to a string
 $favorites_string = implode(",", $favorites);
 
+$secondsInADay = 60 * 60 * 24; // 86400s or 1 day
+$daysBeforeExpiry = 30; // 30 days
+$expiryTime = time() + ($secondsInADay * $daysBeforeExpiry);
+
 // set cookie
-setcookie("favorites", $favorites_string, time() + 86400 * 30);
+setcookie("favorites", $favorites_string, $expiryTime);
 echo json_encode(array('is_favorite' => in_array($id, $favorites)));
