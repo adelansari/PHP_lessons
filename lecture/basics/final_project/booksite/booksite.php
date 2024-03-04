@@ -54,11 +54,14 @@
             <h2><?php echo $genre !== null ? ucfirst($genre) : 'All Books'; ?></h2>
 
             <?php foreach ($filtered_books as $book) : ?>
-                <?php $is_favorite = isset($_COOKIE['favorite_' . $book['id']]);
+                <?php
+                // get the favorite book ids from the cookie and check if the book is favorite
+                $favorites = isset($_COOKIE['favorites']) ? explode(",", $_COOKIE['favorites']) : [];
+                $is_favorite = in_array($book['id'], $favorites);
                 ?>
 
                 <section class="book">
-                    <a class="bookmark fa <?php echo $is_favorite ? 'fa-star' : 'fa-star-o'; ?>" href="setfavorite.php?id=<?php echo $book['id']; ?>"></a>
+                    <a class="bookmark fa <?php echo $is_favorite ? 'fa-star' : 'fa-star-o'; ?>" data-id="<?php echo $book['id']; ?>"></a>
                     <h3><?php echo $book['title']; ?></h3>
                     <p class="publishing-info">
                         <span class="author"><?php echo $book['author']; ?></span>,
@@ -71,6 +74,16 @@
 
         </main>
     </div>
+    <script>
+        document.querySelectorAll('.bookmark').forEach(icon => {
+            icon.addEventListener('click', async event => {
+                const response = await fetch(`setfavorite.php?id=${icon.dataset.id}`);
+                const data = await response.json();
+                icon.classList.toggle('fa-star', data.is_favorite);
+                icon.classList.toggle('fa-star-o', !data.is_favorite);
+            });
+        });
+    </script>
 </body>
 
 </html>
