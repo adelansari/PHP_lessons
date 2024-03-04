@@ -40,4 +40,4 @@ $favorites_string = implode(",", $favorites);
 
 // set cookie
 setcookie("favorites", $favorites_string, time() + 86400 * 30);
-header("Location: booksite.php");
+echo json_encode(array('is_favorite' => in_array($id, $favorites)));
