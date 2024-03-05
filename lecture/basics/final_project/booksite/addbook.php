@@ -7,6 +7,10 @@ if (!isset($_SESSION['login']) || $_SESSION['login'] !== true) {
     exit;
 }
 
+$books = json_decode(file_get_contents('books.json'), true);
+
+isset($_GET['bookid']) ? $bookid = $_GET['bookid'] : $bookid = count($books) + 1;
+
 // if the form has been sent, add the book to the data file
 // In order to protect against cross-site scripting attacks (i.e. basic PHP security), remove HTML tags from all input.
 // There's a function for that. E.g.
@@ -28,7 +32,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         'description' => $description
     ];
 
-    $books = json_decode(file_get_contents('books.json'), true);
     $books[] = $book;
     file_put_contents('books.json', json_encode($books));
 
@@ -64,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <form action="addbook.php" method="post">
                 <p>
                     <label for="bookid">ID:</label>
-                    <input type="number" id="bookid" name="bookid">
+                    <?php echo $bookid ?>
                 </p>
                 <p>
                     <label for="title">Title:</label>
