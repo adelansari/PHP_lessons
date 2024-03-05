@@ -47,9 +47,12 @@
             $genre = isset($_GET['genre']) ? $_GET['genre'] : null;
 
             // filter books based on genre
-            $filtered_books = array_filter($books, function ($book) use ($genre) {
-                return $genre === null || strtolower($book['genre']) === strtolower($genre);
-            });
+            $filtered_books = [];
+            foreach ($books as $book) {
+                if ($genre === null || strtolower($book['genre']) === strtolower($genre)) {
+                    $filtered_books[] = $book;
+                }
+            }
             ?>
             <h2><?php echo $genre !== null ? ucfirst($genre) : 'All Books'; ?></h2>
 
