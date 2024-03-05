@@ -2,7 +2,7 @@
 session_start();
 
 // If the user is not logged in, redirect them back to login.php.
-if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
+if (!isset($_SESSION['login']) || $_SESSION['login'] !== true) {
     header('Location: login.php');
     exit;
 }
@@ -43,7 +43,9 @@ $books = json_decode(file_get_contents('books.json'), true);
                     <form class="deleteform" action="deletebook.php" method="post">
                         <input type="hidden" name="bookid" value="<?php echo $book['id']; ?>">
                         <input type="submit" name="deletebook" value="Delete">
-                        <input type="submit" name="editbook" value="Edit">
+                    </form>
+                    <form class="editform" action="editbook.php?bookid=<?php echo $book['id']; ?>" method="post">
+                        <input type="submit" name="deletebook" value="Edit">
                     </form>
                     <h3><?php echo $book['title']; ?></h3>
                     <p class="publishing-info">
