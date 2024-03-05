@@ -40,12 +40,14 @@ $books = json_decode(file_get_contents('books.json'), true);
             ?>
             <?php foreach ($books as $book) : ?>
                 <section class="book">
+                    <?php $hiddenInput = '<input type="hidden" name="bookid" value="' . $book['id'] . '">'; ?>
                     <form class="deleteform" action="deletebook.php" method="post">
-                        <input type="hidden" name="bookid" value="<?php echo $book['id']; ?>">
+                        <?php echo $hiddenInput; ?>
                         <input type="submit" name="deletebook" value="Delete">
                     </form>
-                    <form class="editform" action="editbook.php?bookid=<?php echo $book['id']; ?>" method="post">
-                        <input type="submit" name="deletebook" value="Edit">
+                    <form class="editform" action="addbook.php" method="get">
+                        <?php echo $hiddenInput; ?>
+                        <input type="submit" name="editbook" value="Edit">
                     </form>
                     <h3><?php echo $book['title']; ?></h3>
                     <p class="publishing-info">
