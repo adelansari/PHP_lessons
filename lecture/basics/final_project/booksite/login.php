@@ -15,8 +15,8 @@ if (isset($_GET['logout'])) {
 
 [$correct_username, $correct_password] = ['admin', 'password'];
 
-if (isset($_SESSION['user']) || (isset($_POST['login']) && $_POST['username'] === $correct_username && $_POST['password'] === $correct_password)) {
-    $_SESSION['user'] = $_POST['username'];
+if (isset($_SESSION['loggedin']) || (isset($_POST['login']) && $_POST['username'] === $correct_username && $_POST['password'] === $correct_password)) {
+    $_SESSION['loggedin'] = true;
     header('Location: admin.php');
     exit;
 }
