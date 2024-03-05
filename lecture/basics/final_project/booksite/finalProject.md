@@ -18,6 +18,6 @@ You can find the detailed instructions in the template files (`booksite.php` and
 
 In the admin page, the user can add a new book, delete an existing book and log out. If you wish, you can also add the functionality to edit an existing book. All the changes to the books are saved in the data file.
 
-The admin side can only be accessed by logging in (`login.php`). The admin page (`admin.php`) checks if the user is logged in and boots intruders back to the login page. Also the pages for adding a book (addbook.php) and deleting a book (deletebook.php) should boot any unlogged users back to login page. Use sessions for this for better security than cookies.
+The admin side can only be accessed by logging in (`login.php`). The admin page (`admin.php`) checks if the user is logged in and boots intruders back to the login page. Also the pages for adding a book (addbook.php), deleting a book (deletebook.php) and editing a book(editbook.php) should boot any unlogged users back to login page. Use sessions for this for better security than cookies.
 
 How the correct username / password combinations are saved (separate file or part of PHP code) is up to you. On a real server accessible online, it should always be a file that can’t be accessed over the Internet (so some other folder in the server) – and the passwords should be encrypted too -, but this is just a practice project.
