@@ -66,8 +66,8 @@
   {
     "id": 9,
     "title": "Jane Eyre",
-    "description": "Charlotte Brontë's novel tells the story of an orphaned governess who falls in love with her enigmatic employer.",
-    "author": "Charlotte Brontë",
+    "description": "Charlotte Bront\u00eb's novel tells the story of an orphaned governess who falls in love with her enigmatic employer.",
+    "author": "Charlotte Bront\u00eb",
     "publishing_year": 1847,
     "genre": "Romance"
   },
@@ -98,8 +98,8 @@
   {
     "id": 13,
     "title": "The Shadow of the Wind",
-    "description": "Carlos Ruiz Zafón's novel follows Daniel Sempere as he discovers a mysterious book and becomes entangled in its secrets, leading him on a journey through post-war Barcelona.",
-    "author": "Carlos Ruiz Zafón",
+    "description": "Carlos Ruiz Zaf\u00f3n's novel follows Daniel Sempere as he discovers a mysterious book and becomes entangled in its secrets, leading him on a journey through post-war Barcelona.",
+    "author": "Carlos Ruiz Zaf\u00f3n",
     "publishing_year": 2001,
     "genre": "Mystery"
   },
@@ -158,5 +158,13 @@
     "author": "Arthur Golden",
     "publishing_year": 1997,
     "genre": "Historical Fiction"
+  },
+  {
+    "id": "21",
+    "title": "Testing",
+    "author": "Adel",
+    "publishing_year": "2023",
+    "genre": "Fantasy",
+    "description": "A fantasy written book by yours truly"
   }
 ]
